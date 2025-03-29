@@ -1,0 +1,22 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with "go test -c"
+*.test
+
+# Output of the go coverage tool, used with "go test -coverprofile"
+*.out
+
+# Dependency directories (if you're using vendoring)
+vendor/
+
+# Go module cache (usually not needed to be ignored if using modules)
+# Note: The Go module cache is outside your project directory.
+# If you have a vendor folder in your project, ignore it; otherwise, leave it out.
+
+# OS-specific files
+.DS_Store
