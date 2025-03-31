@@ -18,5 +18,8 @@ vendor/
 # Note: The Go module cache is outside your project directory.
 # If you have a vendor folder in your project, ignore it; otherwise, leave it out.
 
+# Environment variables for development. Loaded with godotenv package.
+.env
+
 # OS-specific files
 .DS_Store
