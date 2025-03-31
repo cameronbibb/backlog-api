@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/cameronbibb/backlog-api/db"
+	"github.com/cameronbibb/backlog-api/handlers"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -31,5 +32,9 @@ func main() {
 		})
 	})
 
-	router.Run(":8080")
+	router.POST("/users", handlers.CreateUser)
+
+	if err := router.Run(":8080"); err != nil {
+		log.Fatal(err)
+	}
 }
