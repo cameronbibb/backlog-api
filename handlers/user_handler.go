@@ -22,7 +22,27 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	// Check for duplicate username/email
+	// Check for duplicate username/email in db
+	var count int64
+	result := db.DB.Model(&models.User{}).Where("username = ?", input.Username).Count(&count)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error."})
+		return
+	}
+	if count > 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Username already taken."})
+		return
+	}
+
+	result = db.DB.Model(&models.User{}).Where("email = ?", input.Email).Count(&count)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error."})
+		return
+	}
+	if count > 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Email already registered."})
+		return
+	}
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.DefaultCost)
 	if err != nil {
